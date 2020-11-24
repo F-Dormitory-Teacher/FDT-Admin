@@ -13,6 +13,8 @@ const LostContainer = () => {
     searchQuery,
     searchArticlesStatusCode,
     getLosts,
+    modifyLostStatus,
+    modifyLostStatusCode,
     clearLostStore,
   } = store.LostStroe;
 
@@ -26,6 +28,10 @@ const LostContainer = () => {
     },
     [searchQuery],
   );
+
+  const modifyLostStatusDispatch = useCallback(lostProduct => {
+    modifyLostStatus(lostProduct);
+  });
 
   useEffect(() => {
     switch (Math.floor(getLostsStatusCode / 100)) {
@@ -47,6 +53,18 @@ const LostContainer = () => {
     }
   }, [searchArticlesStatusCode]);
 
+  useEffect(() => {
+    switch (Math.floor(modifyLostStatusCode / 100)) {
+      case 2:
+        toast.success('분실 상태 수정에 성공하였습니다.');
+        clearLostStore();
+        loadPage();
+        break;
+      case 4:
+        toast.error(`Code: ${modifyLostStatusCode} 수정 실패.`, {});
+    }
+  }, [modifyLostStatusCode]);
+
   return (
     <>
       <Lost
@@ -54,7 +72,9 @@ const LostContainer = () => {
         searchQuery={searchQueryDispatch}
         losts={losts}
         getLosts={getLosts}
+        modifyLostStatus={modifyLostStatusDispatch}
         clearLostStore={clearLostStore}
+        modifyLostStatusCode={modifyLostStatusCode}
       />
     </>
   );

@@ -5,6 +5,8 @@ import moment from 'moment';
 
 import './Lost.scss';
 import SERVER from '../../config/server';
+import Modal from 'components/common/Modal/Modal';
+import DetailPost from './DetailLost';
 
 const LostStatus = {
   KEEP: '보관',
@@ -18,6 +20,8 @@ const LostStatusColor = {
 
 const Lost = ({ losts, searchQuery, getLosts, clearLostStore }) => {
   const [query, setQuery] = useState('');
+  const [openModal, setOpenModal] = useState(false);
+  const [opendLost, setOpenedLost] = useState({});
 
   const onChangeQuery = useCallback(e => {
     setQuery(e.target.value);
@@ -43,6 +47,11 @@ const Lost = ({ losts, searchQuery, getLosts, clearLostStore }) => {
 
   return (
     <>
+      {openModal && (
+        <Modal onClose={() => setOpenModal(false)}>
+          <DetailPost onClose={() => setOpenModal(false)} opendLost={opendLost} />
+        </Modal>
+      )}
       <div className='lost'>
         <div className='lost-container'>
           <div className='lost-container-search'>
@@ -58,35 +67,53 @@ const Lost = ({ losts, searchQuery, getLosts, clearLostStore }) => {
         </div>
         <div className='lost-list'>
           {!!losts.length ? (
-            losts.map(({ idx, imageUrl, content, location, createdAt, lostStatus }) => (
-              <div className='lost-list-content' key={idx}>
-                <div className='lost-list-content-image'>
-                  {!!imageUrl ? (
-                    <img
-                      className='lost-list-content-image-fit'
-                      src={`${SERVER}/public/${imageUrl}`}
-                    />
-                  ) : (
-                    <h4 className='lost-list-content-image-non_text'>
-                      이미지가 존재하지 않는 게시글입니다.
-                    </h4>
-                  )}
-                </div>
-                <div className='lost-list-content-title'>{content}</div>
-                <div className='lost-list-content-place'>{location}</div>
-                <div className='lost-list-content-area'>
-                  <div className='lost-list-content-area-date'>
-                    {moment(createdAt).format('YYYY-MM-DD')}
+            losts.map(
+              ({ idx, title, imageUrl, content, location, createdAt, lostStatus, userName }) => (
+                <div
+                  className='lost-list-content'
+                  key={idx}
+                  onClick={() => {
+                    setOpenModal(true);
+                    setOpenedLost({
+                      idx,
+                      title,
+                      imageUrl,
+                      content,
+                      location,
+                      createdAt,
+                      lostStatus,
+                      userName,
+                    });
+                  }}
+                >
+                  <div className='lost-list-content-image'>
+                    {!!imageUrl ? (
+                      <img
+                        className='lost-list-content-image-fit'
+                        src={`${SERVER}/public/${imageUrl}`}
+                      />
+                    ) : (
+                      <h4 className='lost-list-content-image-non_text'>
+                        이미지가 존재하지 않는 게시글입니다.
+                      </h4>
+                    )}
                   </div>
-                  <div
-                    className='lost-list-content-area-state'
-                    style={{ color: LostStatusColor[lostStatus] }}
-                  >
-                    {LostStatus[lostStatus]}
+                  <div className='lost-list-content-title'>{title}</div>
+                  <div className='lost-list-content-place'>{location}</div>
+                  <div className='lost-list-content-area'>
+                    <div className='lost-list-content-area-date'>
+                      {moment(createdAt).format('YYYY-MM-DD')}
+                    </div>
+                    <div
+                      className='lost-list-content-area-state'
+                      style={{ color: LostStatusColor[lostStatus] }}
+                    >
+                      {LostStatus[lostStatus]}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              ),
+            )
           ) : (
             <h1 style={{ marginTop: '1rem' }}>게시물이 존재하지 않습니다.</h1>
           )}

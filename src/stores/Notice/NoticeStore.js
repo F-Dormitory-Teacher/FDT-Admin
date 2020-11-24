@@ -8,9 +8,9 @@ class NoticeStore {
   @observable notice = [];
 
   @action
-  handleNoticeInfo = async () => {
+  handleNoticeInfo = async (date, type) => {
     try {
-      const response = await NoticeApi.getNotice();
+      const response = await NoticeApi.getNotice(date, type);
 
       this.noticeList = response.data.notices;
 

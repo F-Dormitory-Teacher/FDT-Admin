@@ -2,9 +2,20 @@ import axios from 'axios';
 import SERVER from '../../config/server';
 
 class NoticeApi {
-  async getNotice() {
+  async getNotice(date, type) {
     try {
-      const url = `${SERVER}/notice/getNotices`;
+      let url;
+      if (date && type) {
+        url = `${SERVER}/notice/getNotices/?date=${date}&type=${type}`;
+      } else if (date) {
+        url = `${SERVER}/notice/getNotices/?date=${date}`;
+      } else if (type) {
+        url = `${SERVER}/notice/getNotices/?type=${type}`;
+      } else {
+        url = `${SERVER}/notice/getNotices`;
+      }
+
+      console.log(url);
 
       const { data } = await axios.get(url);
       return data;

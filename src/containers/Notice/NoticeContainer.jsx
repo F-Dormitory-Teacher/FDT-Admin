@@ -8,21 +8,23 @@ const NoticeContainer = ({}) => {
   const { store } = useStore();
   const { handleNoticeInfo, noticeList } = store.NoticeStore;
   const [isList, setIsList] = useState(true);
+  const [type, setType] = useState('');
+  const [date, setDate] = useState('');
 
   const history = useHistory();
 
   useEffect(() => {
-    handleNoticeInfo().catch(error => {
+    handleNoticeInfo(date, type).catch(error => {
       if (error.message.indexOf('404') !== -1) {
         setIsList(false);
       } else {
         history.push('/login');
       }
     });
-  }, []);
+  }, [type, date]);
   return (
     <>
-      <Notice isList={isList} noticeList={noticeList} />
+      <Notice isList={isList} noticeList={noticeList} setType={setType} setDate={setDate} />
     </>
   );
 };

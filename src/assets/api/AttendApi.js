@@ -6,7 +6,7 @@ class AttendApi {
     try {
       let url;
       if (date && type) {
-        url = `${SERVER}/attend/getAttends/?date=${date}/?type=${type}`;
+        url = `${SERVER}/attend/getAttends/?date=${date}&type=${type}`;
       } else if (date) {
         url = `${SERVER}/attend/getAttends/?date=${date}`;
       } else if (type) {

@@ -24,56 +24,6 @@ const Lost = ({ getLosts, clearLostStore }) => {
       clearLostStore();
     };
   }, []);
-  const losts = [
-    {
-      content: 'fffff',
-      createdAt: '2020-11-23T20:26:07.684Z',
-      idx: 1,
-      imageUrl: 'files-92631105-d0d3-4824-bfd5-0b091d5be4f0-48552260.jpeg',
-      location: 'ffff',
-      lostStatus: 'KEEP',
-      title: 'ffff',
-      userIdx: 2,
-      userName: 'admin',
-      userStudentId: '1234',
-    },
-    {
-      content: 'fffff',
-      createdAt: '2020-11-23T20:26:07.684Z',
-      idx: 2,
-      imageUrl: 'files-92631105-d0d3-4824-bfd5-0b091d5be4f0-48552260.jpeg',
-      location: 'ffff',
-      lostStatus: 'KEEP',
-      title: 'ffff',
-      userIdx: 2,
-      userName: 'admin',
-      userStudentId: '1234',
-    },
-    {
-      content: 'fffff',
-      createdAt: '2020-11-23T20:26:07.684Z',
-      idx: 3,
-      imageUrl: 'files-92631105-d0d3-4824-bfd5-0b091d5be4f0-48552260.jpeg',
-      location: 'ffff',
-      lostStatus: 'KEEP',
-      title: 'ffff',
-      userIdx: 2,
-      userName: 'admin',
-      userStudentId: '1234',
-    },
-    {
-      content: 'fffff',
-      createdAt: '2020-11-23T20:26:07.684Z',
-      idx: 4,
-      imageUrl: 'files-92631105-d0d3-4824-bfd5-0b091d5be4f0-48552260.jpeg',
-      location: 'ffff',
-      lostStatus: 'LOSTED',
-      title: 'ffff',
-      userIdx: 2,
-      userName: 'admin',
-      userStudentId: '1234',
-    },
-  ];
 
   return (
     <>
@@ -85,35 +35,39 @@ const Lost = ({ getLosts, clearLostStore }) => {
           </div>
         </div>
         <div className='lost-list'>
-          {losts.map(({ idx, imageUrl, content, location, createdAt, lostStatus }) => (
-            <div className='lost-list-content' key={idx}>
-              <div className='lost-list-content-image'>
-                {!!imageUrl ? (
-                  <img
-                    className='lost-list-content-image-fit'
-                    src={`${SERVER}/public/${imageUrl}`}
-                  />
-                ) : (
-                  <h4 className='lost-list-content-image-non_text'>
-                    이미지가 존재하지 않는 게시글입니다.
-                  </h4>
-                )}
-              </div>
-              <div className='lost-list-content-title'>{content}</div>
-              <div className='lost-list-content-place'>{location}</div>
-              <div className='lost-list-content-area'>
-                <div className='lost-list-content-area-date'>
-                  {moment(createdAt).format('YYYY-MM-DD')}
+          {!!losts.length ? (
+            losts.map(({ idx, imageUrl, content, location, createdAt, lostStatus }) => (
+              <div className='lost-list-content' key={idx}>
+                <div className='lost-list-content-image'>
+                  {!!imageUrl ? (
+                    <img
+                      className='lost-list-content-image-fit'
+                      src={`${SERVER}/public/${imageUrl}`}
+                    />
+                  ) : (
+                    <h4 className='lost-list-content-image-non_text'>
+                      이미지가 존재하지 않는 게시글입니다.
+                    </h4>
+                  )}
                 </div>
-                <div
-                  className='lost-list-content-area-state'
-                  style={{ color: LostStatusColor[lostStatus] }}
-                >
-                  {LostStatus[lostStatus]}
+                <div className='lost-list-content-title'>{content}</div>
+                <div className='lost-list-content-place'>{location}</div>
+                <div className='lost-list-content-area'>
+                  <div className='lost-list-content-area-date'>
+                    {moment(createdAt).format('YYYY-MM-DD')}
+                  </div>
+                  <div
+                    className='lost-list-content-area-state'
+                    style={{ color: LostStatusColor[lostStatus] }}
+                  >
+                    {LostStatus[lostStatus]}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <h1 style={{ marginTop: '1rem' }}>게시물이 존재하지 않습니다.</h1>
+          )}
         </div>
       </div>
     </>

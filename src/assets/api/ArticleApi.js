@@ -1,6 +1,3 @@
-import axios from 'axios';
-import SERVER from '../../config/server';
-import Cleint from './Client';
 import Client from './Client';
 
 class ArticleApi extends Client {

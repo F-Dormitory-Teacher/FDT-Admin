@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { BiSearch } from 'react-icons/bi';
@@ -18,7 +18,17 @@ const ArticleStatusColor = {
   HOLDED: 'black',
 };
 
-const Suggest = ({ articles, loadPage, clearArticleStore }) => {
+const Suggest = ({ articles, loadPage, searchQuery, clearArticleStore }) => {
+  const [query, setQuery] = useState('');
+
+  const onChangeQuery = useCallback(e => {
+    setQuery(e.target.value);
+  });
+
+  const onSearchHandler = useCallback(() => {
+    searchQuery(query);
+  }, [query, searchQuery]);
+
   useEffect(() => {
     loadPage();
 
@@ -31,9 +41,15 @@ const Suggest = ({ articles, loadPage, clearArticleStore }) => {
     <>
       <div className='suggest'>
         <div className='suggest-container'>
-          <div className='notice-container-search'>
-            <input type='text' placeholder='검색' />
-            <BiSearch />
+          <div className='suggest-container-search'>
+            <input
+              type='text'
+              placeholder='제목으로 검색'
+              value={query}
+              onChange={onChangeQuery}
+              onKeyDown={e => e.key === 'Enter' && onSearchHandler()}
+            />
+            <BiSearch onClick={onSearchHandler} />
           </div>
         </div>
         <div className='suggest-list'>

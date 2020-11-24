@@ -50,3 +50,11 @@ body {
 .Toastify__toast-body {
   color: #ffffff;
 }
+
+.Toastify__close-button--success {
+  > svg {
+    > path {
+      color: #ffffff;
+    }
+  }
+}

@@ -7,6 +7,7 @@ import SuggestPage from '../pages/SuggestPage';
 import LostPage from '../pages/LostPage';
 import ShowNoticePage from '../pages/ShowNoticePage';
 import WriteNoticePage from '../pages/WriteNoticePage';
+import ModifyNoticePage from '../pages/ModifyNoticePage';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/lost' component={LostPage} />
         <Route path='/ShowNotice' component={ShowNoticePage} />
         <Route path='/WriteNotice' component={WriteNoticePage} />
+        <Route path='/ModifyNotice' component={ModifyNoticePage} />
       </Switch>
     </div>
   );

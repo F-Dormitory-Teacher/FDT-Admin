@@ -55,6 +55,21 @@ class NoticeStore {
       });
     }
   };
+
+  @action
+  handleModifyNotice = async (date, type, title, contnet) => {
+    try {
+      const response = await NoticeApi.modifyNotice(date, type, title, contnet);
+
+      return new Promise((resolve, reject) => {
+        resolve(response);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
+    }
+  };
 }
 
 export default NoticeStore;

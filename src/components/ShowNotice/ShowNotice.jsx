@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './ShowNotice.scss';
+import { NavLink } from 'react-router-dom';
 
 const ShowNotice = ({ notice }) => {
   return (
@@ -12,7 +13,9 @@ const ShowNotice = ({ notice }) => {
             <div className='shownotice-container-area-date'>{notice.date}</div>
           </div>
           <div className='shownotice-container-content'>{notice.content}</div>
-          <div className='shownotice-container-btn'>수정하기</div>
+          <NavLink to={`/ModifyNotice/?idx=${notice.idx}`}>
+            <div className='shownotice-container-btn'>수정하기</div>
+          </NavLink>
         </div>
       </div>
     </>

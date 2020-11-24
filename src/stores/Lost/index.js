@@ -7,6 +7,8 @@ class LostStore {
   @observable losts = [];
   @observable getLostsStatusCode = 0;
 
+  @observable searchArticlesStatusCode = 0;
+
   @action
   async getLosts() {
     try {
@@ -24,9 +26,25 @@ class LostStore {
   }
 
   @action
+  async searchQuery(query) {
+    try {
+      const {
+        status,
+        data: { lostProducts },
+      } = await LostApi.searchQuery(query);
+
+      this.searchQueryStatusCode = status;
+      this.losts = lostProducts;
+    } catch (error) {
+      this.searchQueryStatusCode = error.response.status;
+    }
+  }
+
+  @action
   clearLostStore() {
     this.losts = [];
     this.getLostsStatusCode = 0;
+    this.searchQueryStatusCode = 0;
   }
 }
 

@@ -32,18 +32,19 @@ class ArticleStore {
       const {
         status,
         data: { articles },
-      } = await ArticleApi.searchuery(query);
+      } = await ArticleApi.searchQuery(query);
 
-      this.searchArticlesStatusCode = status;
+      this.searchQueryStatusCode = status;
       this.articles = articles;
     } catch (error) {
-      this.searchArticlesStatusCode = error.response.status;
+      this.searchQueryStatusCode = error.response.status;
     }
   }
 
   @action
   clearArticleStore() {
     this.articles = [];
+    this.searchQueryStatusCode = 0;
     this.getArticlesStatusCode = 0;
   }
 }

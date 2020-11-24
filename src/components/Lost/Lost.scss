@@ -73,9 +73,23 @@
       border-radius: 4px;
 
       &-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 20rem;
         height: 21rem;
         background-color: #343434;
+
+        &-fit {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        &-non_text {
+          text-align: center;
+          color: #ffffff;
+        }
       }
 
       &-title {
@@ -90,6 +104,7 @@
         margin-top: 0.4rem;
         display: flex;
         justify-content: space-between;
+        font-weight: bold;
       }
     }
   }

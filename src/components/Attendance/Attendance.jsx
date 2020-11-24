@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './Attendance.scss';
 
-const Attendance = ({ attend, setDate, setType, listLoading }) => {
+const Attendance = ({
+  attend,
+  setDate,
+  setType,
+  listLoading,
+  isRunning,
+  getStatus,
+  turnOn,
+  turnOff,
+  clearLostStore,
+}) => {
   console.log(attend);
+
+  useEffect(() => {
+    getStatus();
+
+    return () => {
+      clearLostStore();
+    };
+  }, []);
+
   return (
     <>
       <div className='attendance'>
@@ -16,6 +35,16 @@ const Attendance = ({ attend, setDate, setType, listLoading }) => {
               <option value='NIGHT'>저녁점호</option>
             </select>
           </div>
+          {isRunning ? (
+            <div className='attendance-container-scheduler' onClick={() => turnOff()}>
+              스케쥴러 중지
+            </div>
+          ) : (
+            <div className='attendance-container-scheduler' onClick={() => turnOn()}>
+              스케쥴러 시작
+            </div>
+          )}
+
           <div className='attendance-container-btn' onClick={() => listLoading()}>
             리스트확인
           </div>

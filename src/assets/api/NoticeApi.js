@@ -12,6 +12,31 @@ class NoticeApi {
       throw new Error(`${error}`);
     }
   }
+
+  async createNotice(date, type, title, content) {
+    try {
+      const url = `${SERVER}/notice/createNotice`;
+      let config = {};
+
+      const body = {
+        date,
+        type,
+        title,
+        content,
+      };
+
+      if (localStorage.getItem('accessToken')) {
+        config = {
+          headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
+        };
+      }
+
+      const { data } = await axios.post(url, body, config);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
 }
 
 export default new NoticeApi();

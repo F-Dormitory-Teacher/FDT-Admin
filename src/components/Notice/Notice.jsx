@@ -24,19 +24,17 @@ const Notice = ({ isList, noticeList }) => {
               return (
                 <NavLink to='/ShowNotice' key={item.idx}>
                   <div className='notice-list-content'>
-                    <div className='attendance-list-content'>
-                      <div className='attendance-list-content-name'>{item.title}</div>
-                      <div className='attendance-list-content-date'>{item.date}</div>
+                    <div className='notice-list-content'>
+                      <div className='notice-list-content-name'>{item.title}</div>
+                      <div className='notice-list-content-day'>
+                        {item.type === 'MORNING' ? '아침점호' : '저녁점호'}
+                      </div>
+                      <div className='notice-list-content-date'>{item.date}</div>
                     </div>
                   </div>
                 </NavLink>
               );
             })}
-            {/* {noticeList.map(item => {
-              return (
-                
-              );
-            })} */}
           </div>
         ) : (
           <div className='notice-none'>공지가 없어요!</div>

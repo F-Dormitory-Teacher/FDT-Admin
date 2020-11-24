@@ -16,7 +16,7 @@ const LostStatusColor = {
   LOSTED: 'red',
 };
 
-const Lost = ({ getLosts, clearLostStore }) => {
+const Lost = ({ losts, getLosts, clearLostStore }) => {
   useEffect(() => {
     getLosts();
 

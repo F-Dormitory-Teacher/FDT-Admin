@@ -4,7 +4,7 @@ import Suggest from '../../components/Suggest/Suggest';
 import { toast } from 'react-toastify';
 import useStore from 'lib/hooks/useStore';
 
-const SuggestContainer = ({}) => {
+const SuggestContainer = () => {
   const { store } = useStore();
   const { articles, getArticlesStatusCode, getArticles, clearArticleStore } = store.ArticleStore;
 

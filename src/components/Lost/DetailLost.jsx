@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import moment from 'moment';
 
 import './DetailLost.scss';
@@ -6,8 +6,20 @@ import SERVER from 'config/server';
 
 const DetailLost = ({
   onClose,
-  opendLost: { idx, title, imageUrl, content, location, userName, createdAt, lostStatus },
+  opendLost: { idx, title, imageUrl, content, location, userName, createdAt },
+  modifyLostStatus,
 }) => {
+  const onModifyHandler = useCallback(lostStatus => {
+    modifyLostStatus({
+      lostId: idx,
+      title,
+      location,
+      content,
+      lostStatus,
+      imageUrl: imageUrl ? imageUrl : '',
+    });
+  }, []);
+
   return (
     <div className='detail_lost'>
       <span className='detail_lost-close' onClick={onClose}>
@@ -15,7 +27,7 @@ const DetailLost = ({
       </span>
       <aside className='detail_lost-image--bg'>
         {!!imageUrl ? (
-          <img src={`${SERVER}/upload/${imageUrl}`} alt='분실물 이미지' />
+          <img src={`${SERVER}/public/${imageUrl}`} alt='분실물 이미지' />
         ) : (
           <h3>이미지가 존재하지 않습니다.</h3>
         )}
@@ -46,8 +58,16 @@ const DetailLost = ({
         </pre>
         <footer>
           <div>
-            <button>보관</button>
-            <button>분실</button>
+            <button
+              onClick={() => confirm('보관 상태로 수정하시겠습니까?') && onModifyHandler('KEEP')}
+            >
+              보관
+            </button>
+            <button
+              onClick={() => confirm('분실 상태로 수정하시겠습니까?') && onModifyHandler('LOSTED')}
+            >
+              분실
+            </button>
           </div>
           <div>
             <h2>{userName}</h2>

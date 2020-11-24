@@ -8,6 +8,10 @@ class Cleint {
     this.client = client;
   }
 
+  setClient(client) {
+    this.client = client;
+  }
+
   static createClientWithAccessToken(domain) {
     return axios.create({
       baseURL: `${SERVER}/${domain}`,

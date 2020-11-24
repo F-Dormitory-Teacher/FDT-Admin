@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 import './Header.scss';
 import { NavLink } from 'react-router-dom';
 
+import Logo from 'assets/image/logo.svg';
+
 const Header = ({ isLogin, logOut }) => {
   return (
     <>
       <div className='header'>
         <div className='header-box'>
           <div className='header-box-left'>
-            <div className='header-box-left-logo'></div>
+            <div className='header-box-left-logo'>
+              <img src={Logo} />
+            </div>
             <div className='header-box-left-menu'>
               <NavLink exact to='/' activeClassName='header-box-left-menu-content-selected'>
                 <div className='header-box-left-menu-content'>출석현황</div>

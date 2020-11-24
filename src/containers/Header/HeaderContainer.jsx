@@ -14,6 +14,7 @@ const HeaderContainer = ({}) => {
   const logOut = () => {
     localStorage.clear();
     tryLogOut();
+    history.push('/login');
   };
 
   useEffect(() => {

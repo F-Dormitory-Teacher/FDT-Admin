@@ -65,9 +65,12 @@
         display: flex;
         justify-content: space-between;
 
-        &-value {
-          margin-left: 2rem;
+        &-name {
+          margin-right: 4rem;
         }
+      }
+      &-value {
+        margin-left: 2rem;
       }
     }
   }

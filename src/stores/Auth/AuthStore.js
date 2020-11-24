@@ -15,6 +15,13 @@ class AuthStore {
     try {
       const response = await AuthApi.Login(email, pw);
 
+      axios.defaults.headers.common['Authorization'] = `Bearer ${response.accessToken}`;
+
+      if (response.status === 200) {
+        this.isLogin = true;
+        localStorage.setItem('accessToken', response.accessToken);
+      }
+
       return new Promise((resolve, reject) => {
         resolve(response);
       });

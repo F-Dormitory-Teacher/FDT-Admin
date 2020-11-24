@@ -7,11 +7,25 @@ import useStore from '../../lib/hooks/useStore';
 
 const LostContainer = () => {
   const { store } = useStore();
-  const { losts, getLostsStatusCode, getLosts, clearLostStore } = store.LostStroe;
+  const {
+    losts,
+    getLostsStatusCode,
+    searchQuery,
+    searchArticlesStatusCode,
+    getLosts,
+    clearLostStore,
+  } = store.LostStroe;
 
   const loadPage = useCallback(() => {
     getLosts();
   }, []);
+
+  const searchQueryDispatch = useCallback(
+    query => {
+      searchQuery(query);
+    },
+    [searchQuery],
+  );
 
   useEffect(() => {
     switch (Math.floor(getLostsStatusCode / 100)) {
@@ -22,9 +36,26 @@ const LostContainer = () => {
         toast.error(`Code: ${getLostsStatusCode} 불러오기 실패.`, {});
     }
   }, [getLostsStatusCode]);
+
+  useEffect(() => {
+    switch (Math.floor(searchArticlesStatusCode / 100)) {
+      case 2:
+        toast.success('검색 성공');
+        break;
+      case 4:
+        toast.error(`Code: ${searchArticlesStatusCode} 검색 실패.`, {});
+    }
+  }, [searchArticlesStatusCode]);
+
   return (
     <>
-      <Lost losts={losts} getLosts={getLosts} clearLostStore={clearLostStore} />
+      <Lost
+        loadPage={loadPage}
+        searchQuery={searchQueryDispatch}
+        losts={losts}
+        getLosts={getLosts}
+        clearLostStore={clearLostStore}
+      />
     </>
   );
 };

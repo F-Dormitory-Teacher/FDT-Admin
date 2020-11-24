@@ -29,6 +29,12 @@ const Suggest = ({ articles, loadPage, searchQuery, clearArticleStore }) => {
     searchQuery(query);
   }, [query, searchQuery]);
 
+  const onKeyDown = e => {
+    if (e.key === 'Enter') {
+      onSearchHandler();
+    }
+  };
+
   useEffect(() => {
     loadPage();
 
@@ -47,43 +53,47 @@ const Suggest = ({ articles, loadPage, searchQuery, clearArticleStore }) => {
               placeholder='제목으로 검색'
               value={query}
               onChange={onChangeQuery}
-              onKeyDown={e => e.key === 'Enter' && onSearchHandler()}
+              onKeyDown={onKeyDown}
             />
             <BiSearch onClick={onSearchHandler} />
           </div>
         </div>
         <div className='suggest-list'>
-          {articles.map(({ idx, image, content, location, status, createdAt }) => {
-            return (
-              <div className='suggest-list-content' key={idx}>
-                <div className='suggest-list-content-image'>
-                  {!!image ? (
-                    <img
-                      className='suggest-list-content-image-fit'
-                      src={`${SERVER}/public/${image}`}
-                    />
-                  ) : (
-                    <h4 className='suggest-list-content-image-non_text'>
-                      이미지가 존재하지 않는 게시글입니다.
-                    </h4>
-                  )}
-                </div>
-                <div className='suggest-list-content-title'>{content}</div>
-                <div className='suggest-list-content-place'>{location}</div>
-                <div className='suggest-list-content-area'>
-                  <div className='suggest-list-content-area-date'>
-                    {moment(createdAt).format('YYYY-MM-DD')}
+          {!!articles.length ? (
+            articles.map(({ idx, image, content, location, status, createdAt }) => {
+              return (
+                <div className='suggest-list-content' key={idx}>
+                  <div className='suggest-list-content-image'>
+                    {!!image ? (
+                      <img
+                        className='suggest-list-content-image-fit'
+                        src={`${SERVER}/public/${image}`}
+                      />
+                    ) : (
+                      <h4 className='suggest-list-content-image-non_text'>
+                        이미지가 존재하지 않는 게시글입니다.
+                      </h4>
+                    )}
                   </div>
-                  <div
-                    className='suggest-list-content-area-state'
-                    style={{ color: ArticleStatusColor[status] }}
-                  >
-                    {ArticleStatus[status]}
+                  <div className='suggest-list-content-title'>{content}</div>
+                  <div className='suggest-list-content-place'>{location}</div>
+                  <div className='suggest-list-content-area'>
+                    <div className='suggest-list-content-area-date'>
+                      {moment(createdAt).format('YYYY-MM-DD')}
+                    </div>
+                    <div
+                      className='suggest-list-content-area-state'
+                      style={{ color: ArticleStatusColor[status] }}
+                    >
+                      {ArticleStatus[status]}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <h1 style={{ marginTop: '1rem' }}>게시물이 존재하지 않습니다.</h1>
+          )}
         </div>
       </div>
     </>

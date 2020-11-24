@@ -12,6 +12,7 @@ const SuggestContainer = () => {
     getArticles,
     searchQuery,
     clearArticleStore,
+    searchArticlesStatusCode,
   } = store.ArticleStore;
 
   const loadPage = useCallback(() => {
@@ -34,6 +35,16 @@ const SuggestContainer = () => {
         toast.error(`Code: ${getArticlesStatusCode} 불러오기 실패.`, {});
     }
   }, [getArticlesStatusCode]);
+
+  useEffect(() => {
+    switch (Math.floor(searchArticlesStatusCode / 100)) {
+      case 2:
+        toast.success('검색 성공');
+        break;
+      case 4:
+        toast.error(`Code: ${searchArticlesStatusCode} 검색 실패.`, {});
+    }
+  }, [searchArticlesStatusCode]);
 
   return (
     <>

@@ -12,6 +12,14 @@ class LostApi extends Client {
       throw error;
     }
   }
+
+  async searchQuery(query) {
+    try {
+      return await this.getClient().get(`/search?title=${query}`);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new LostApi();

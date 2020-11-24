@@ -22,7 +22,6 @@ class LostStore {
       this.getLostsStatusCode = status;
       this.losts = lostProducts;
     } catch (error) {
-      console.log(error);
       this.getLostsStatusCode = error.response.status;
     }
   }

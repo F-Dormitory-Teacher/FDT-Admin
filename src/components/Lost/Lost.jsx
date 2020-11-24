@@ -18,7 +18,14 @@ const LostStatusColor = {
   LOSTED: 'red',
 };
 
-const Lost = ({ losts, searchQuery, getLosts, clearLostStore }) => {
+const Lost = ({
+  losts,
+  searchQuery,
+  getLosts,
+  clearLostStore,
+  modifyLostStatus,
+  modifyLostStatusCode,
+}) => {
   const [query, setQuery] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const [opendLost, setOpenedLost] = useState({});
@@ -45,11 +52,21 @@ const Lost = ({ losts, searchQuery, getLosts, clearLostStore }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (Math.floor(modifyLostStatusCode / 100) === 2) {
+      setOpenModal(false);
+    }
+  }, [modifyLostStatusCode]);
+
   return (
     <>
       {openModal && (
         <Modal onClose={() => setOpenModal(false)}>
-          <DetailPost onClose={() => setOpenModal(false)} opendLost={opendLost} />
+          <DetailPost
+            onClose={() => setOpenModal(false)}
+            opendLost={opendLost}
+            modifyLostStatus={modifyLostStatus}
+          />
         </Modal>
       )}
       <div className='lost'>
@@ -81,7 +98,6 @@ const Lost = ({ losts, searchQuery, getLosts, clearLostStore }) => {
                       content,
                       location,
                       createdAt,
-                      lostStatus,
                       userName,
                     });
                   }}

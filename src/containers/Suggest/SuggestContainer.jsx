@@ -6,11 +6,24 @@ import useStore from 'lib/hooks/useStore';
 
 const SuggestContainer = () => {
   const { store } = useStore();
-  const { articles, getArticlesStatusCode, getArticles, clearArticleStore } = store.ArticleStore;
+  const {
+    articles,
+    getArticlesStatusCode,
+    getArticles,
+    searchQuery,
+    clearArticleStore,
+  } = store.ArticleStore;
 
   const loadPage = useCallback(() => {
     getArticles();
   }, []);
+
+  const searchQueryDispatch = useCallback(
+    query => {
+      searchQuery(query);
+    },
+    [searchQuery],
+  );
 
   useEffect(() => {
     switch (Math.floor(getArticlesStatusCode / 100)) {
@@ -24,7 +37,12 @@ const SuggestContainer = () => {
 
   return (
     <>
-      <Suggest articles={articles} loadPage={loadPage} clearArticleStore={clearArticleStore} />
+      <Suggest
+        articles={articles}
+        loadPage={loadPage}
+        searchQuery={searchQueryDispatch}
+        clearArticleStore={clearArticleStore}
+      />
     </>
   );
 };

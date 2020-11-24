@@ -9,6 +9,8 @@ class LostStore {
 
   @observable searchArticlesStatusCode = 0;
 
+  @observable modifyLostStatusCode = 0;
+
   @action
   async getLosts() {
     try {
@@ -41,10 +43,22 @@ class LostStore {
   }
 
   @action
+  async modifyLostStatus(lostProduct) {
+    try {
+      const { status } = await LostApi.modifyLostStatus(lostProduct);
+
+      this.modifyLostStatusCode = status;
+    } catch (error) {
+      this.modifyLostStatusCode = error.response.status;
+    }
+  }
+
+  @action
   clearLostStore() {
     this.losts = [];
     this.getLostsStatusCode = 0;
     this.searchQueryStatusCode = 0;
+    this.modifyLostStatusCode = 0;
   }
 }
 

@@ -16,7 +16,7 @@
     input {
       width: 32rem;
       height: 3rem;
-      margin-top: 3rem;
+      margin-top: 2rem;
       border: none;
       border-bottom: 1px solid #c7c7c7;
       font-size: 1.2rem;
@@ -43,6 +43,29 @@
       }
     }
 
+    &-time {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      &-type {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        div {
+          width: 7rem;
+          height: 3rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: 1rem;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+        }
+      }
+    }
+
     &-btnarea {
       width: 100%;
       display: flex;
@@ -53,7 +76,7 @@
         border: 1px solid #25822e;
         color: #25822e;
         height: 3rem;
-        margin-top: 2rem;
+        margin-top: 3rem;
         border-radius: 4px;
         display: flex;
         justify-content: center;

@@ -37,7 +37,7 @@ const Suggest = ({ articles, loadPage, clearArticleStore }) => {
           </div>
         </div>
         <div className='suggest-list'>
-          {articles.map(({ idx, image, content, location, status }) => {
+          {articles.map(({ idx, image, content, location, status, createdAt }) => {
             return (
               <div className='suggest-list-content' key={idx}>
                 <div className='suggest-list-content-image'>
@@ -56,7 +56,7 @@ const Suggest = ({ articles, loadPage, clearArticleStore }) => {
                 <div className='suggest-list-content-place'>{location}</div>
                 <div className='suggest-list-content-area'>
                   <div className='suggest-list-content-area-date'>
-                    {moment().format('YYYY-MM-DD')}
+                    {moment(createdAt).format('YYYY-MM-DD')}
                   </div>
                   <div
                     className='suggest-list-content-area-state'

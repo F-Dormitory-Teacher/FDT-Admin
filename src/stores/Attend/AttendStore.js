@@ -8,10 +8,10 @@ class AttendStore {
   @observable attend = [];
 
   @action
-  handleAttendInfo = async () => {
+  handleAttendInfo = async (date, type) => {
     try {
-      console.log(localStorage.getItem('accessToken'));
-      const response = await AttendApi.AttendInfo();
+      console.log(date);
+      const response = await AttendApi.AttendInfo(date, type);
 
       this.attend = response.data.attendances;
       console.log(response.data.attendances);

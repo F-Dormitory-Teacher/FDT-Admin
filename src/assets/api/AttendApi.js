@@ -2,9 +2,20 @@ import axios from 'axios';
 import SERVER from '../../config/server';
 
 class AttendApi {
-  async AttendInfo() {
+  async AttendInfo(date, type) {
     try {
-      const url = `${SERVER}/attend/getAttends`;
+      let url;
+      if (date && type) {
+        url = `${SERVER}/attend/getAttends/?date=${date}/?type=${type}`;
+      } else if (date) {
+        url = `${SERVER}/attend/getAttends/?date=${date}`;
+      } else if (type) {
+        url = `${SERVER}/attend/getAttends/?type=${type}`;
+      } else {
+        url = `${SERVER}/attend/getAttends`;
+      }
+
+      console.log(url);
       let config = {};
 
       if (localStorage.getItem('accessToken')) {

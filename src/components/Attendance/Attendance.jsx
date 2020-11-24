@@ -2,17 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Attendance.scss';
 
-const Attendance = ({ attend }) => {
+const Attendance = ({ attend, setDate, setType, listLoading }) => {
   console.log(attend);
   return (
     <>
       <div className='attendance'>
         <div className='attendance-container'>
           <div className='attendance-container-search'>
-            <input type='date' />
-            <input type='text' placeholder='학번' />
+            <input type='date' onChange={e => setDate(e.target.value)} />
+            <select type='text' placeholder='학번' onChange={e => setType(e.target.value)}>
+              <option value=''>전체</option>
+              <option value='MORNING'>아침점호</option>
+              <option value='NIGHT'>저녁점호</option>
+            </select>
           </div>
-          <div className='attendance-container-btn'>리스트생성</div>
+          <div className='attendance-container-btn' onClick={() => listLoading()}>
+            리스트확인
+          </div>
         </div>
         <div className='attendance-list'>
           {attend.map(item => {

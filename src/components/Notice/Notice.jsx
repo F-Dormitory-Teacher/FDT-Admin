@@ -13,7 +13,9 @@ const Notice = ({}) => {
             <input type='text' placeholder='검색' />
             <BiSearch />
           </div>
-          <div className='notice-container-btn'>공지하기</div>
+          <NavLink to='/WriteNotice'>
+            <div className='notice-container-btn'>공지하기</div>
+          </NavLink>
         </div>
         <div className='notice-list'>
           <NavLink to='/ShowNotice'>

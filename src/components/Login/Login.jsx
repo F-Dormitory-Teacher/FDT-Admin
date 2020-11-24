@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './Login.scss';
-import { NavLink } from 'react-router-dom';
 
 const Login = ({ setEmail, setPw, handleTryLogin }) => {
   return (
@@ -19,20 +17,16 @@ const Login = ({ setEmail, setPw, handleTryLogin }) => {
           <div className='login-container-contents'>
             <div className='login-container-contents-input'>
               <input placeholder='아이디' onChange={e => setEmail(e.target.value)} />
-              <input placeholder='비밀번호' onChange={e => setPw(e.target.value)} />
+              <input placeholder='비밀번호' onChange={e => setPw(e.target.value)} type='password' />
             </div>
-            <NavLink to='/'>
-              <div className='login-container-contents-btn' onClick={() => handleTryLogin()}>
-                로그인
-              </div>
-            </NavLink>
+            <div className='login-container-contents-btn' onClick={() => handleTryLogin()}>
+              로그인
+            </div>
           </div>
         </div>
       </div>
     </>
   );
 };
-
-Login.propTypes = {};
 
 export default Login;

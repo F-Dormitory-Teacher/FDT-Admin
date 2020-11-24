@@ -5,11 +5,14 @@ import stores from './stores';
 import { Provider } from 'mobx-react';
 import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import { ToastContainer } from 'react-toastify';
 import './util/util.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <Provider store={stores}>
     <BrowserRouter>
+      <ToastContainer />
       <App />
     </BrowserRouter>
   </Provider>,

@@ -4,7 +4,6 @@ import './Header.scss';
 import { NavLink } from 'react-router-dom';
 
 const Header = ({ isLogin, logOut }) => {
-  console.log(isLogin);
   return (
     <>
       <div className='header'>

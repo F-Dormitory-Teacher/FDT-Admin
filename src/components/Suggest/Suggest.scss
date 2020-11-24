@@ -59,6 +59,20 @@
         width: 20rem;
         height: 21rem;
         background-color: #343434;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &-fit {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        &-non_text {
+          text-align: center;
+          color: white;
+        }
       }
 
       &-title {
@@ -70,6 +84,7 @@
       }
 
       &-area {
+        font-weight: bold;
         margin-top: 0.4rem;
         display: flex;
         justify-content: space-between;

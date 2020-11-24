@@ -66,6 +66,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        &:hover {
+          background-color: #25822e;
+          color: #ffffff;
+        }
       }
     }
   }

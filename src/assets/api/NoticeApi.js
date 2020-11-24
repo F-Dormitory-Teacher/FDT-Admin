@@ -37,6 +37,18 @@ class NoticeApi {
       throw new Error(`${error}`);
     }
   }
+
+  async showNotice(idx) {
+    try {
+      const url = `${SERVER}/notice/getNotice/${idx}`;
+      console.log(idx);
+
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
 }
 
 export default new NoticeApi();

@@ -22,7 +22,7 @@ const Notice = ({ isList, noticeList }) => {
           <div className='notice-list'>
             {noticeList.map(item => {
               return (
-                <NavLink to='/ShowNotice' key={item.idx}>
+                <NavLink to={`/ShowNotice/?idx=${item.idx}`} key={item.idx}>
                   <div className='notice-list-content'>
                     <div className='notice-list-content'>
                       <div className='notice-list-content-name'>{item.title}</div>

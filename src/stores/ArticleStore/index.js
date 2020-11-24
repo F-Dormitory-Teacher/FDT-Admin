@@ -7,6 +7,8 @@ class ArticleStore {
   @observable articles = [];
   @observable getArticlesStatusCode = 0;
 
+  @observable searchArticlesStatusCode = 0;
+
   @action
   async getArticles() {
     try {
@@ -21,6 +23,21 @@ class ArticleStore {
       this.articles = articles;
     } catch (error) {
       this.getArticlesStatusCode = error.response.status;
+    }
+  }
+
+  @action
+  async searchQuery(query) {
+    try {
+      const {
+        status,
+        data: { articles },
+      } = await ArticleApi.searchuery(query);
+
+      this.searchArticlesStatusCode = status;
+      this.articles = articles;
+    } catch (error) {
+      this.searchArticlesStatusCode = error.response.status;
     }
   }
 

@@ -18,12 +18,12 @@ const ArticleStatusColor = {
   HOLDED: 'black',
 };
 
-const Suggest = ({ articles, loadPage, clearArticleStor }) => {
+const Suggest = ({ articles, loadPage, clearArticleStore }) => {
   useEffect(() => {
     loadPage();
 
     return () => {
-      clearArticleStor();
+      clearArticleStore();
     };
   }, []);
 

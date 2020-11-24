@@ -6,7 +6,7 @@ import useStore from 'lib/hooks/useStore';
 
 const SuggestContainer = ({}) => {
   const { store } = useStore();
-  const { articles, getArticlesStatusCode, getArticles, clearArticleStor } = store.ArticleStore;
+  const { articles, getArticlesStatusCode, getArticles, clearArticleStore } = store.ArticleStore;
 
   const loadPage = useCallback(() => {
     getArticles();
@@ -24,7 +24,7 @@ const SuggestContainer = ({}) => {
 
   return (
     <>
-      <Suggest articles={articles} loadPage={loadPage} clearArticleStor={clearArticleStor} />
+      <Suggest articles={articles} loadPage={loadPage} clearArticleStore={clearArticleStore} />
     </>
   );
 };

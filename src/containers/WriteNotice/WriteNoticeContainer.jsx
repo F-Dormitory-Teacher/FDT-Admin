@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { observer } from 'mobx-react';
 import useStore from '../../lib/hooks/useStore';
 import WriteNotice from '../../components/WriteNotice/WriteNotice';
+import { useHistory } from 'react-router-dom';
 
 const WriteNoticeContainer = ({}) => {
   const [date, setDate] = useState('');
@@ -11,9 +12,12 @@ const WriteNoticeContainer = ({}) => {
 
   const { store } = useStore();
   const { handleCreateNotice } = store.NoticeStore;
+  const history = useHistory();
 
   const writeNotice = () => {
-    handleCreateNotice(date, dayType, title, comment);
+    handleCreateNotice(date, dayType, title, comment).then(() => {
+      history.push('/notice');
+    });
   };
 
   return (

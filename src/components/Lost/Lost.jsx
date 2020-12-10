@@ -103,7 +103,7 @@ const Lost = ({
                   }}
                 >
                   <div className='lost-list-content-image'>
-                    {!!imageUrl ? (
+                    {!!imageUrl && imageUrl !== 'null' ? (
                       <img
                         className='lost-list-content-image-fit'
                         src={`${SERVER}/public/${imageUrl}`}
